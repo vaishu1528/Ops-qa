@@ -188,3 +188,170 @@ Defect Retesting
 Regression Testing
         ↓
 Test Summary
+
+7. Test Environment
+
+The fictional QA environment will contain:
+
+Component	Details
+Application	WellOps Web Application
+Environment	QA
+Browser	Google Chrome
+Operating System	Windows
+Test Data	Synthetic / Demo Data
+User Types	Admin, Engineer, Operations, Viewer
+
+No production data or confidential information will be used.
+8 . Test Data
+| Field     | Example     |
+| --------- | ----------- |
+| Well ID   | WELL-1001   |
+| Well Name | Alpha-01    |
+| Field     | Demo Field  |
+| Operator  | Demo Energy |
+| Status    | Active      |
+| Well Type | Horizontal  |
+
+9. Entry Criteria
+
+Testing can begin when:
+
+Requirements are available and reviewed.
+Test environment is accessible.
+Required application build is deployed.
+Test data is available.
+Test cases are reviewed.
+Required user accounts are available.
+Major environment issues are resolved.
+
+10. Exit Criteria
+
+Testing can be considered complete when:
+
+Planned test cases have been executed.
+Critical and high-severity defects are resolved or formally accepted.
+Failed test cases have been analyzed.
+Required regression testing is completed.
+Requirement coverage is reviewed.
+Test execution results are documented.
+Test Summary Report is completed.
+
+11. Defect Management
+
+Defects identified during testing will be documented with:
+
+Defect ID
+Title
+Module
+Severity
+Priority
+Environment
+Preconditions
+Steps to Reproduce
+Expected Result
+Actual Result
+Evidence
+Status
+
+Defect lifecycle:
+New
+ ↓
+Assigned
+ ↓
+In Progress
+ ↓
+Fixed
+ ↓
+Retest
+ ↓
+Verified
+ ↓
+Closed
+If the defect is not fixed:
+Retest
+ ↓
+Failed
+ ↓
+Reopened
+
+12. Severity Classification
+| Severity | Description                                                          |
+| -------- | -------------------------------------------------------------------- |
+| Critical | Application or critical business workflow is unavailable             |
+| High     | Major functionality is not working and significantly impacts testing |
+| Medium   | Functionality is partially impacted but workaround may exist         |
+| Low      | Minor functional or UI issue with limited impact                     |
+
+13. Priority Classification
+| Priority | Description                                  |
+| -------- | -------------------------------------------- |
+| P1       | Requires immediate attention                 |
+| P2       | Should be addressed with high priority       |
+| P3       | Can be addressed in normal development cycle |
+| P4       | Low-priority improvement                     |
+
+14. Test Deliverables
+
+The following QA deliverables will be maintained:
+
+Requirements Specification
+Test Plan
+Test Strategy
+Test Cases
+Requirement Traceability Matrix
+Test Data
+Bug Reports
+Test Execution Report
+Regression Test Report
+Test Summary Report
+15. Risks
+| Risk                         | Impact                  | Mitigation                             |
+| ---------------------------- | ----------------------- | -------------------------------------- |
+| Environment unavailable      | Testing delay           | Coordinate environment availability    |
+| Incomplete requirements      | Incorrect test coverage | Review requirements before execution   |
+| Insufficient test data       | Limited validation      | Prepare synthetic test data in advance |
+| High-severity defects        | Testing blocked         | Prioritize critical workflows          |
+| Frequent application changes | Regression risk         | Maintain regression test suite         |
+
+16. Assumptions
+Required test environment is available.
+Test users are available.
+Requirements are sufficiently defined.
+Test data can be created in the QA environment.
+Application dependencies are available during testing.
+Defects can be tracked and retested.
+
+17. Testing Responsibilities
+| Role             | Responsibility                                                  |
+| ---------------- | --------------------------------------------------------------- |
+| QA Engineer      | Test design, execution, defect reporting, retesting, regression |
+| Developer        | Defect analysis and resolution                                  |
+| Business Analyst | Requirement clarification                                       |
+| Product Owner    | Requirement validation and business acceptance                  |
+| QA Lead          | Test planning, review, reporting, and QA coordination           |
+
+18. Reporting
+
+Testing progress will be communicated through:
+
+Daily QA Status
+Test Execution Report
+Defect Summary
+Regression Status
+Test Summary Report
+
+Key metrics may include:
+
+Total Test Cases
+Executed Test Cases
+Passed Test Cases
+Failed Test Cases
+Blocked Test Cases
+Pass Percentage
+Open Defects
+Closed Defects
+Requirement Coverage
+
+19. Approval
+
+This Test Plan is a fictional portfolio artifact created to demonstrate QA planning and testing practices.
