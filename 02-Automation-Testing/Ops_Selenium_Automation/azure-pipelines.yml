@@ -1,0 +1,83 @@
+# Disable automatic CI trigger
+trigger: none
+
+# Scheduled trigger: Runs Sunday to Thursday at 6:30 PM UTC
+# (Which is Monday to Friday at 12:00 AM IST)
+
+#schedules:
+ # - cron: "30 18 * * 0-4"     # 18:30 UTC = 00:00 IST
+  #  displayName: Weekdays 12:00 AM IST Run
+  #  branches:
+   #   include:
+   #    - master
+  #  always: true
+
+
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: BuildAndTest
+  timeoutInMinutes: 360
+  steps:
+  - bash: |
+      wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+    displayName: 'Download JDK 21'
+
+  - task: JavaToolInstaller@0
+    displayName: 'Use Java 21'
+    inputs:
+      versionSpec: 21
+      jdkArchitectureOption: x64
+      jdkSourceOption: LocalDirectory
+      jdkFile: '$(build.sourcesdirectory)/jdk-21_linux-x64_bin.tar.gz'
+      jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk21'
+
+  - script: |
+      sudo apt-get update
+      sudo apt-get install -y tree
+      tree target/
+      rm -rf target/cucumber-reports
+    displayName: 'Clean Report Directory'
+
+  - task: Maven@4
+    displayName: 'Run Maven Tests with GUI Headless Support'
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.21'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'clean test'
+      options: >
+        -Dtest=TestNgRunner 
+        "-Dcucumber.options=--plugin json:target/cucumber-reports/CucumberTestReport.json --plugin html:target/CucumberReports/CucumberReport.html"
+
+  - script: |
+      tree
+      echo "Installing jq for JSON processing..."
+      sudo apt-get update && sudo apt-get install -y jq
+    displayName: 'Install jq'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'target/'
+      artifact: 'TestNGHtmlReport'
+      publishLocation: 'pipeline'
+    displayName: 'Publish TestNG HTML Report'
+
+  - task: PublishCucumberReport@1
+    inputs:
+      jsonDir: 'target/cucumber-reports/'
+      outputPath: 'target/cucumber-reports/'
+      theme: 'bootstrap'
+      reportSuiteAsScenarios: true
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/cucumber-report.xml'
+      testResultsFormat: 'JUnit'
+      failTaskOnFailedTests: true

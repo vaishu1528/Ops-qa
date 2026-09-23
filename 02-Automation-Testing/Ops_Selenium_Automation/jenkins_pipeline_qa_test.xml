@@ -1,0 +1,41 @@
+<flow-definition plugin="workflow-job@2.40"><actions /><description>Your Pipeline Description</description><keepDependencies>false</keepDependencies><properties /><definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition"><script>pipeline {
+            agent any
+            tools {
+                jdk 'java11'
+                maven 'mvn'
+            }
+            stages {
+                stage('Checkout') {
+                    steps {
+                        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Vaibhavgarg001', url: 'https://github.com/Vaibhavgarg001/FracProPlus.git']])
+                    }
+                }
+
+            stage('Build') {
+                    steps {
+                        sh 'mvn clean install'
+                    }
+                }
+
+            stage('Test') {
+                    steps {
+                        sh 'mvn test'
+                    }
+                }
+
+            stage('Publish Test Report') {
+                    steps {
+                        publishHTML([allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: false,
+                        reportDir: 'target/CucumberReports',
+                        reportFiles: 'CucumberReport.html',
+                        reportName: 'HTML Report',
+                        reportTitles: '',
+                        useWrapperFileDirectly: true
+                        ])
+                        }
+                    }
+                }
+            }
+            </script><sandbox>true</sandbox></definition><triggers /></flow-definition>
