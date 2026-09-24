@@ -1,64 +1,365 @@
-# MiniFrac Test Cases
+# MiniFrac / DFIT Test Cases
 
-## Module: MiniFrac / DFIT Engineering Analysis
+## Document Information
 
-These test cases validate the fictional WellOps MiniFrac workflow, including input data, calculations, plots, engineering parameters, validation, and report generation.
-
-> Note: All engineering values and scenarios in this document are fictional portfolio data and are not copied from any proprietary application.
-
----
-
-| Test Case ID | Scenario | Preconditions | Test Steps | Expected Result | Priority |
-|---|---|---|---|---|---|
-| TC-MF-001 | Verify MiniFrac module loads successfully | User is logged in and a valid well exists | 1. Login to WellOps.<br>2. Select a valid well.<br>3. Navigate to MiniFrac.<br>4. Wait for the module to load.<br>5. Observe the page. | MiniFrac module loads successfully and displays the required engineering sections, inputs, controls, and plots. | High |
-| TC-MF-002 | Verify valid MiniFrac input data can be entered | MiniFrac page is accessible | 1. Open MiniFrac.<br>2. Enter valid flow rate values.<br>3. Enter valid time and proppant concentration values.<br>4. Enter valid fluid and reservoir parameters.<br>5. Save the inputs. | Valid MiniFrac input data is accepted and saved successfully. | High |
-| TC-MF-003 | Verify mandatory MiniFrac fields | MiniFrac input form is accessible | 1. Open MiniFrac input section.<br>2. Leave a mandatory field blank.<br>3. Enter valid values in other fields.<br>4. Click Calculate or Save.<br>5. Observe the validation behavior. | Required field validation is displayed and calculation/save is prevented until mandatory data is provided. | High |
-| TC-MF-004 | Verify Clean Rate calculation | Valid Flow Rate and Proppant Concentration data is available | 1. Enter valid Flow Rate.<br>2. Enter valid Proppant Concentration.<br>3. Enter valid Proppant Specific Gravity.<br>4. Trigger the calculation.<br>5. Compare the displayed Clean Rate with the expected formula result. | Clean Rate is calculated correctly according to the configured engineering calculation. | High |
-| TC-MF-005 | Verify Clean Volume calculation | Valid time and Clean Rate data is available | 1. Enter valid treatment time.<br>2. Enter valid Clean Rate 1.<br>3. Enter valid Clean Rate 2 where applicable.<br>4. Trigger the calculation.<br>5. Verify the displayed Clean Volume. | Clean Volume is calculated correctly and displayed with the expected unit. | High |
-| TC-MF-006 | Verify Step Slurry calculation | Valid treatment time and flow rate data is available | 1. Enter valid treatment time.<br>2. Enter Flow Rate 1.<br>3. Enter Flow Rate 2.<br>4. Trigger the calculation.<br>5. Verify the calculated Step Slurry value. | Step Slurry is calculated correctly according to the defined calculation rule and displayed in the expected unit. | High |
-| TC-MF-007 | Verify rho calculation for proppant/fluid data | Specific gravity value is available | 1. Enter a valid specific gravity value.<br>2. Trigger the calculation.<br>3. Observe the calculated rho value.<br>4. Compare it with the expected formula result.<br>5. Verify the displayed unit. | Rho is calculated correctly using the configured specific gravity conversion. | High |
-| TC-MF-008 | Verify MiniFrac calculation with two flow rates | Valid Flow Rate 1 and Flow Rate 2 are available | 1. Enter different valid Flow Rate 1 and Flow Rate 2 values.<br>2. Enter valid treatment time.<br>3. Enter required fluid parameters.<br>4. Run the calculation.<br>5. Verify the calculated results. | Calculations correctly use both flow rates according to the defined engineering formulas. | High |
-| TC-MF-009 | Verify zero flow rate validation | MiniFrac input form is accessible | 1. Open MiniFrac inputs.<br>2. Enter zero as Flow Rate.<br>3. Enter valid remaining parameters.<br>4. Trigger calculation.<br>5. Observe the validation result. | Application handles zero Flow Rate according to business rules and prevents invalid engineering calculations when required. | High |
-| TC-MF-010 | Verify negative flow rate validation | MiniFrac input form is accessible | 1. Open MiniFrac inputs.<br>2. Enter a negative Flow Rate.<br>3. Enter valid remaining parameters.<br>4. Trigger calculation.<br>5. Observe the result. | Negative Flow Rate is rejected when it is outside the permitted engineering range. | High |
-| TC-MF-011 | Verify ISIP plot generation | Valid MiniFrac pressure/time data is available | 1. Enter valid pressure and time data.<br>2. Run the MiniFrac calculation.<br>3. Navigate to the ISIP Plot.<br>4. Observe the plotted data.<br>5. Compare the plot with the input dataset. | ISIP Plot is generated successfully and represents the supplied pressure/time data correctly. | High |
-| TC-MF-012 | Verify SQRT plot generation | Valid MiniFrac data is available | 1. Enter valid MiniFrac data.<br>2. Run the calculation.<br>3. Open the SQRT Plot.<br>4. Review the plotted values.<br>5. Verify the plot corresponds to the calculated dataset. | SQRT Plot is generated correctly using the available MiniFrac data. | High |
-| TC-MF-013 | Verify G-Function plot generation | Valid pump-time and closure-time data is available | 1. Enter valid pump-time information.<br>2. Enter valid DIM Time values.<br>3. Run the MiniFrac calculation.<br>4. Open the G-Function Plot.<br>5. Verify the calculated plot values. | G-Function values and plot are generated according to the configured G-Function calculation. | High |
-| TC-MF-014 | Verify Log-Log plot generation | Valid MiniFrac dataset is available | 1. Enter valid pressure/time data.<br>2. Run the calculation.<br>3. Navigate to the Log-Log Plot.<br>4. Observe the graph.<br>5. Compare the plotted data with the source dataset. | Log-Log Plot is generated successfully and represents the available data correctly. | High |
-| TC-MF-015 | Verify Pump Time calculation | Valid Start Pump Clock and End Pump Clock values exist | 1. Enter Start Pump Clock.<br>2. Enter End Pump Clock.<br>3. Trigger the calculation.<br>4. Review the Pump Time value.<br>5. Compare it with the expected time difference. | Pump Time equals the difference between End Pump Clock and Start Pump Clock. | High |
-| TC-MF-016 | Verify Closure Time calculation | Valid Pump Time and DIM Time are available | 1. Enter valid Pump Time.<br>2. Enter valid DIM Time.<br>3. Trigger the calculation.<br>4. Review Closure Time.<br>5. Compare it with the expected calculation. | Closure Time is calculated correctly according to the configured engineering formula. | High |
-| TC-MF-017 | Verify G-Function calculation | Valid DIM Time is available | 1. Enter a valid DIM Time.<br>2. Trigger the G-Function calculation.<br>3. Review the G(TD) value.<br>4. Compare it with the expected formula result.<br>5. Verify the plotted value. | G(TD) is calculated correctly and the corresponding plot value is generated consistently. | High |
-| TC-MF-018 | Verify engineering parameter validation | MiniFrac engineering inputs are accessible | 1. Open the engineering parameter section.<br>2. Enter valid parameter values.<br>3. Enter an out-of-range value.<br>4. Trigger calculation.<br>5. Observe the validation response. | Values outside the configured engineering range are rejected or appropriately validated. | High |
-| TC-MF-019 | Verify calculation results update after input changes | Initial MiniFrac calculation is completed | 1. Enter valid input data.<br>2. Run the calculation.<br>3. Modify one calculation input.<br>4. Run the calculation again.<br>5. Compare the updated result with the previous result. | Calculation results are recalculated and reflect the latest input values without retaining stale results. | High |
-| TC-MF-020 | Verify calculation results persist after saving | Valid MiniFrac calculation is completed | 1. Enter valid MiniFrac data.<br>2. Run the calculation.<br>3. Save the results.<br>4. Refresh or reopen the MiniFrac module.<br>5. Verify the saved results. | Saved MiniFrac inputs and results persist correctly after reopening the module. | High |
-| TC-MF-021 | Verify editing MiniFrac input data | Existing MiniFrac data is available | 1. Open an existing MiniFrac dataset.<br>2. Select an editable input.<br>3. Modify the value with valid data.<br>4. Save or recalculate.<br>5. Review the results. | Updated input is saved and dependent calculations are recalculated correctly. | High |
-| TC-MF-022 | Verify Cancel operation discards MiniFrac changes | Existing MiniFrac data is available | 1. Open existing MiniFrac data.<br>2. Modify one or more inputs.<br>3. Click Cancel or navigate away without saving.<br>4. Reopen the MiniFrac dataset.<br>5. Verify the original values. | Unsaved MiniFrac changes are discarded and the previously saved values remain unchanged. | Medium |
-| TC-MF-023 | Verify API calculation values match UI values | MiniFrac API integration is available | 1. Enter valid MiniFrac input data.<br>2. Execute the calculation through the UI.<br>3. Retrieve the corresponding calculation response through the API.<br>4. Compare key calculated values.<br>5. Verify the results. | UI calculation values match the corresponding API response values within the defined precision and rounding rules. | High |
-| TC-MF-024 | Verify slope and tangent values are displayed correctly | Valid MiniFrac plot data exists | 1. Generate the applicable MiniFrac plot.<br>2. Calculate or retrieve slope and tangent values.<br>3. Review the displayed engineering values.<br>4. Compare them with the source calculation/API response.<br>5. Verify consistency. | Slope and tangent values are displayed correctly and match the applicable calculation or API response. | High |
-| TC-MF-025 | Verify MiniFrac report generation | Valid MiniFrac calculation is completed | 1. Complete a valid MiniFrac analysis.<br>2. Open the Reports option.<br>3. Select MiniFrac report.<br>4. Generate the report.<br>5. Review the generated report. | MiniFrac report is generated successfully and contains the expected inputs, calculations, plots, and engineering results. | High |
-| TC-MF-026 | Verify MiniFrac data remains associated with the selected well | Multiple wells exist | 1. Open MiniFrac for `WELL-1001`.<br>2. Verify its MiniFrac data.<br>3. Navigate back to Well Management.<br>4. Select `WELL-1002`.<br>5. Open MiniFrac. | MiniFrac data displayed for each well belongs only to the selected well. | High |
-| TC-MF-027 | Verify MiniFrac UI controls and labels | MiniFrac page is accessible | 1. Open MiniFrac.<br>2. Verify input field labels.<br>3. Verify buttons and controls.<br>4. Verify units and section headers.<br>5. Verify plot controls. | Required MiniFrac UI elements are visible, correctly labeled, aligned, and usable. | Medium |
-| TC-MF-028 | Verify MiniFrac behavior with large valid dataset | Large synthetic dataset is available | 1. Load a large valid MiniFrac dataset.<br>2. Start the analysis.<br>3. Wait for calculation completion.<br>4. Review the plots and results.<br>5. Verify application responsiveness and data completeness. | Application processes the large dataset successfully without data loss, incorrect calculations, or unexpected UI failures. | Medium |
-| TC-MF-029 | Verify MiniFrac error handling for incomplete dataset | Incomplete MiniFrac dataset is available | 1. Load incomplete MiniFrac data.<br>2. Attempt to run the analysis.<br>3. Observe validation or error behavior.<br>4. Review displayed messages.<br>5. Verify that invalid results are not presented as valid results. | Application identifies incomplete data and provides appropriate feedback without generating misleading engineering results. | High |
-| TC-MF-030 | Verify end-to-end MiniFrac workflow | Valid well and MiniFrac test data are available | 1. Select a valid well.<br>2. Enter or load MiniFrac data.<br>3. Execute calculations and review plots.<br>4. Validate engineering results and save the analysis.<br>5. Generate the MiniFrac report. | Complete MiniFrac workflow executes successfully from data entry through calculation, plot validation, saving, and report generation. | High |
+| Field | Details |
+|---|---|
+| Document Name | MiniFrac / DFIT Test Cases |
+| Application Type | Oil & Gas Well Operations Management System |
+| Module | MiniFrac / DFIT |
+| Test Level | System Testing |
+| Test Type | Functional, Positive, Negative, Validation, Calculation, Plot Validation, Data Integrity, Regression |
+| Test Data | Synthetic test data |
+| Environment | QA |
 
 ---
 
-## Test Coverage
+## Test Case 1 — Verify MiniFrac / DFIT Section Access
 
-The MiniFrac test cases cover:
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-001 |
+| Scenario | Verify that an authorized user can access the MiniFrac / DFIT section for a selected well |
+| Requirement ID | REQ-MF-001 |
+| Test Type | Positive / Functional |
+| Priority | P1 |
+| Preconditions | User is logged in and has permission to access MiniFrac / DFIT |
 
-- Functional Testing
-- Positive Testing
-- Negative Testing
-- UI Testing
-- Engineering Calculation Validation
-- Boundary Value Testing
-- Data Validation
-- Plot Validation
-- API/UI Integration Testing
-- Data Persistence
-- Error Handling
-- Regression Testing
-- Report Validation
-- End-to-End Testing
-- Large Dataset Validation
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Log in using a valid authorized test account. | The user is authenticated successfully. |
+| 2 | Navigate to Well Management and select `PAD-001 – Falcon North Pad`. | The wells associated with the selected pad are displayed. |
+| 3 | Select `WELL-1001 – Falcon-A01`. | `WELL-1001` becomes the active well context. |
+| 4 | Navigate to the MiniFrac / DFIT section. | The MiniFrac / DFIT section opens successfully. |
+| 5 | Review the available input and analysis areas. | Applicable MiniFrac / DFIT fields and analysis controls are displayed. |
+| 6 | Verify the selected well context. | The displayed MiniFrac / DFIT information belongs to `WELL-1001`. |
+
+---
+
+## Test Case 2 — Verify MiniFrac / DFIT Input Data Entry
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-002 |
+| Scenario | Verify that valid MiniFrac / DFIT input data can be entered |
+| Requirement ID | REQ-MF-002 |
+| Test Type | Positive / Functional |
+| Priority | P1 |
+| Preconditions | User has permission to enter MiniFrac / DFIT data |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT section for a valid test well. | The MiniFrac / DFIT input area is displayed. |
+| 2 | Select the applicable input field for test data entry. | The selected field accepts user input. |
+| 3 | Enter valid synthetic pressure, rate, time, and volume-related values as applicable. | Each valid input value is accepted. |
+| 4 | Review the entered dataset before processing. | All entered values are displayed against the correct fields. |
+| 5 | Verify that the entered values use the expected units and formats. | Input values follow the configured field format and unit requirements. |
+| 6 | Save the MiniFrac / DFIT input data. | The valid dataset is saved successfully. |
+
+---
+
+## Test Case 3 — Verify Required MiniFrac / DFIT Input Validation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-003 |
+| Scenario | Verify that required MiniFrac / DFIT input fields cannot be left blank |
+| Requirement ID | REQ-MF-003, REQ-DATA-001 |
+| Test Type | Negative / Validation |
+| Priority | P1 |
+| Preconditions | MiniFrac / DFIT input fields are available and at least one field is mandatory |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open MiniFrac / DFIT input for an editable test well. | The required input fields are displayed. |
+| 2 | Identify a mandatory field containing a valid test value. | The mandatory field is available for editing. |
+| 3 | Remove the value from the mandatory field. | The field becomes empty. |
+| 4 | Attempt to save or process the dataset. | The system prevents the incomplete dataset from being saved or processed. |
+| 5 | Review the validation feedback. | A clear validation message identifies the missing required value. |
+| 6 | Enter a valid value and retry the operation. | The validation error is cleared and the dataset can proceed when all required values are valid. |
+
+---
+
+## Test Case 4 — Verify Numeric MiniFrac / DFIT Input Validation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-004 |
+| Scenario | Verify that non-numeric values are rejected in numeric MiniFrac / DFIT input fields |
+| Requirement ID | REQ-MF-003, REQ-DATA-002 |
+| Test Type | Negative / Validation |
+| Priority | P1 |
+| Preconditions | Numeric MiniFrac / DFIT input fields are available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT input section. | The input fields are displayed successfully. |
+| 2 | Select a field configured for numeric data. | The selected field is ready for numeric input. |
+| 3 | Enter alphabetic or unsupported non-numeric characters. | The application rejects the invalid characters or identifies the value as invalid. |
+| 4 | Attempt to save or process the dataset. | The system prevents invalid numeric input from being processed. |
+| 5 | Review the validation message. | Clear feedback identifies the invalid numeric value. |
+| 6 | Replace the invalid input with a valid numeric value and retry. | The valid value is accepted and the dataset can proceed. |
+
+---
+
+## Test Case 5 — Verify MiniFrac / DFIT Input Range Validation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-005 |
+| Scenario | Verify that MiniFrac / DFIT values outside configured limits are rejected |
+| Requirement ID | REQ-MF-003, REQ-DATA-003 |
+| Test Type | Negative / Boundary |
+| Priority | P1 |
+| Preconditions | Applicable MiniFrac / DFIT fields have defined valid ranges |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open an editable MiniFrac / DFIT dataset. | The applicable input fields are displayed. |
+| 2 | Select a field with a configured minimum value. | The selected field is ready for input. |
+| 3 | Enter a value below the configured minimum. | The application identifies the value as outside the permitted range. |
+| 4 | Attempt to save or process the dataset. | The invalid lower-range value is rejected. |
+| 5 | Replace the value with one above the configured maximum and retry. | The application identifies the upper-range value as invalid. |
+| 6 | Enter a value within the valid range and retry. | The valid value is accepted and processing can continue. |
+
+---
+
+## Test Case 6 — Verify Clean Volume Calculation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-006 |
+| Scenario | Verify that Clean Volume is calculated correctly from valid MiniFrac / DFIT input data |
+| Requirement ID | REQ-MF-004 |
+| Test Type | Functional / Calculation |
+| Priority | P1 |
+| Preconditions | Valid synthetic rate, time, and applicable volume inputs are available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT analysis section with a valid dataset. | The analysis area loads with the available input data. |
+| 2 | Review the rate and time values used for Clean Volume calculation. | The calculation inputs are displayed correctly. |
+| 3 | Trigger the Clean Volume calculation or analysis operation. | The application processes the provided input data. |
+| 4 | Wait for the calculation to complete. | Clean Volume is calculated without a processing error. |
+| 5 | Review the displayed Clean Volume value. | The Clean Volume value is populated in the designated result area. |
+| 6 | Compare the result with the expected synthetic calculation. | The displayed Clean Volume matches the expected calculation within the application's defined precision. |
+
+---
+
+## Test Case 7 — Verify Clean Volume Changes with Input Data
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-007 |
+| Scenario | Verify that Clean Volume is recalculated when relevant input data changes |
+| Requirement ID | REQ-MF-004 |
+| Test Type | Functional / Calculation |
+| Priority | P1 |
+| Preconditions | A valid MiniFrac / DFIT dataset has already been processed |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the processed MiniFrac / DFIT dataset. | Existing input and Clean Volume result are displayed. |
+| 2 | Record the current Clean Volume value. | The original Clean Volume value is available for comparison. |
+| 3 | Modify a calculation input such as rate or time using a valid test value. | The updated input value is accepted. |
+| 4 | Recalculate the MiniFrac / DFIT analysis. | The application processes the updated input data. |
+| 5 | Review the new Clean Volume result. | Clean Volume is recalculated using the updated input. |
+| 6 | Compare the new result with the original value. | The Clean Volume result reflects the changed input according to the defined calculation logic. |
+
+---
+
+## Test Case 8 — Verify Clean Rate Calculation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-008 |
+| Scenario | Verify that Clean Rate is calculated correctly from valid MiniFrac / DFIT data |
+| Requirement ID | REQ-MF-005 |
+| Test Type | Functional / Calculation |
+| Priority | P1 |
+| Preconditions | Valid MiniFrac / DFIT rate and related input data are available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT analysis section. | The analysis page loads successfully. |
+| 2 | Review the input data required for Clean Rate calculation. | Required calculation inputs are populated with valid values. |
+| 3 | Trigger the analysis or Clean Rate calculation. | The application starts processing the calculation. |
+| 4 | Wait for processing to complete. | The Clean Rate calculation completes without an error. |
+| 5 | Review the Clean Rate result. | A Clean Rate value is displayed in the appropriate result area. |
+| 6 | Compare the result with the expected synthetic calculation. | The displayed Clean Rate matches the expected result within the defined application precision. |
+
+---
+
+## Test Case 9 — Verify ISIP Plot Generation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-009 |
+| Scenario | Verify that the ISIP plot is generated from a valid MiniFrac / DFIT dataset |
+| Requirement ID | REQ-MF-006 |
+| Test Type | Functional / Plot Validation |
+| Priority | P1 |
+| Preconditions | Valid pressure and time-series data is available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open a valid MiniFrac / DFIT dataset. | The dataset and analysis options are displayed. |
+| 2 | Navigate to the ISIP analysis option. | The ISIP analysis control is available. |
+| 3 | Trigger ISIP plot generation. | The application starts processing the ISIP analysis. |
+| 4 | Wait for plot generation to complete. | The ISIP plot is generated successfully. |
+| 5 | Review the plot axes, data points, and labels. | The plot displays the applicable pressure/time information with readable labels and data. |
+| 6 | Compare the displayed ISIP-related result with the expected synthetic dataset behavior. | The generated plot and result are consistent with the supplied test data. |
+
+---
+
+## Test Case 10 — Verify Square Root Plot Generation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-010 |
+| Scenario | Verify that the Square Root plot is generated correctly from valid data |
+| Requirement ID | REQ-MF-007 |
+| Test Type | Functional / Plot Validation |
+| Priority | P1 |
+| Preconditions | Valid MiniFrac / DFIT time and pressure data is available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT analysis section for a valid dataset. | The analysis options are displayed. |
+| 2 | Select the Square Root plot option. | The Square Root analysis option is selected. |
+| 3 | Trigger the plot generation. | The application processes the selected dataset for Square Root analysis. |
+| 4 | Wait for the analysis to complete. | The Square Root plot is generated successfully. |
+| 5 | Review the plotted data and axes. | The plot contains the expected transformed data representation and readable labels. |
+| 6 | Compare the displayed trend with the expected synthetic dataset. | The plot trend is consistent with the supplied input data and configured calculation logic. |
+
+---
+
+## Test Case 11 — Verify G-Function Plot Generation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-011 |
+| Scenario | Verify that the G-Function plot is generated correctly |
+| Requirement ID | REQ-MF-008 |
+| Test Type | Functional / Plot Validation |
+| Priority | P1 |
+| Preconditions | Valid MiniFrac / DFIT pressure and time-series data is available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT analysis area. | The analysis controls are displayed. |
+| 2 | Select the G-Function analysis option. | The G-Function analysis is selected. |
+| 3 | Trigger G-Function plot generation. | The application begins G-Function processing. |
+| 4 | Wait for the plot to render. | The G-Function plot is generated successfully. |
+| 5 | Review the plotted values, axes, and labels. | The plot contains the applicable G-Function representation with readable information. |
+| 6 | Compare the plot with the expected synthetic dataset behavior. | The generated plot is consistent with the supplied test data and configured calculation rules. |
+
+---
+
+## Test Case 12 — Verify Log-Log Plot Generation
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-012 |
+| Scenario | Verify that the Log-Log plot is generated correctly |
+| Requirement ID | REQ-MF-009 |
+| Test Type | Functional / Plot Validation |
+| Priority | P1 |
+| Preconditions | Valid positive-valued MiniFrac / DFIT analysis data is available |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open the MiniFrac / DFIT analysis area with a valid dataset. | The analysis controls and dataset are displayed. |
+| 2 | Select the Log-Log analysis option. | The Log-Log analysis is selected. |
+| 3 | Trigger Log-Log plot generation. | The application starts processing the Log-Log transformation. |
+| 4 | Wait for plot generation to complete. | The Log-Log plot is displayed successfully. |
+| 5 | Review the plot axes and plotted data. | The axes and data representation use the expected logarithmic presentation. |
+| 6 | Compare the plot against the expected synthetic dataset trend. | The displayed trend is consistent with the supplied valid input data. |
+
+---
+
+## Test Case 13 — Verify Analysis Results Persistence
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-013 |
+| Scenario | Verify that processed MiniFrac / DFIT results remain available after navigation and refresh |
+| Requirement ID | REQ-MF-010 |
+| Test Type | Data Persistence / Regression |
+| Priority | P1 |
+| Preconditions | A valid MiniFrac / DFIT dataset has been processed successfully |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open a successfully processed MiniFrac / DFIT dataset. | Input data and calculated results are displayed. |
+| 2 | Record the Clean Volume, Clean Rate, and applicable analysis results. | The processed values are available for comparison. |
+| 3 | Navigate to another section of the selected well. | Navigation completes without losing the processed analysis. |
+| 4 | Return to the MiniFrac / DFIT section. | The previously processed dataset is available. |
+| 5 | Refresh the browser page. | The MiniFrac / DFIT section reloads successfully. |
+| 6 | Compare the displayed results with the recorded values. | The persisted results remain consistent after navigation and refresh. |
+
+---
+
+## Test Case 14 — Verify MiniFrac / DFIT Data Association Between Wells
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-014 |
+| Scenario | Verify that MiniFrac / DFIT analysis data remains associated with the correct well |
+| Requirement ID | REQ-MF-010, REQ-DI-001, REQ-DI-003 |
+| Test Type | Data Integrity / Regression |
+| Priority | P1 |
+| Preconditions | `WELL-1001` and `WELL-1002` contain different MiniFrac / DFIT datasets |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open MiniFrac / DFIT for `WELL-1001`. | The analysis data for `WELL-1001` is displayed. |
+| 2 | Record a unique input or calculated value from `WELL-1001`. | The value is captured for comparison. |
+| 3 | Switch to `WELL-1002`. | The active well context changes to `WELL-1002`. |
+| 4 | Open MiniFrac / DFIT for `WELL-1002`. | The dataset associated with `WELL-1002` is displayed. |
+| 5 | Compare the displayed values with the recorded `WELL-1001` value. | `WELL-1001` analysis data is not incorrectly displayed for `WELL-1002`. |
+| 6 | Return to `WELL-1001`. | The original MiniFrac / DFIT dataset remains correctly associated with `WELL-1001`. |
+
+---
+
+## Test Case 15 — Verify MiniFrac / DFIT Processing Failure Handling
+
+| Field | Details |
+|---|---|
+| Test Case ID | TC-MF-015 |
+| Scenario | Verify that the application handles MiniFrac / DFIT processing failure without displaying misleading results |
+| Requirement ID | REQ-MF-003, REQ-ERR-002 |
+| Test Type | Negative / Error Handling |
+| Priority | P2 |
+| Preconditions | Test environment supports controlled simulation of a MiniFrac / DFIT processing failure |
+
+| Step No. | Test Step | Expected Result |
+|---:|---|---|
+| 1 | Open MiniFrac / DFIT for a valid test well. | The MiniFrac / DFIT section loads successfully. |
+| 2 | Enter or select a valid synthetic dataset for analysis. | The dataset is accepted by the application. |
+| 3 | Simulate a controlled processing-service failure and trigger the analysis. | The application detects the processing failure. |
+| 4 | Review the analysis response. | A meaningful error or failure state is displayed instead of fabricated or stale results being presented as new results. |
+| 5 | Restore the processing service and retry the same valid analysis. | The application successfully starts the analysis after recovery. |
+| 6 | Review the regenerated results and plots. | Valid Clean Volume, Clean Rate, and applicable analysis plots are generated from the supplied dataset. |
+
+---
+
+## Test Case Summary
+
+| Test Case ID | Scenario | Type | Priority |
+|---|---|---|---|
+| TC-MF-001 | Verify MiniFrac / DFIT section access | Positive / Functional | P1 |
+| TC-MF-002 | Verify MiniFrac / DFIT input data entry | Positive / Functional | P1 |
+| TC-MF-003 | Verify required MiniFrac / DFIT input validation | Negative / Validation | P1 |
+| TC-MF-004 | Verify numeric MiniFrac / DFIT input validation | Negative / Validation | P1 |
+| TC-MF-005 | Verify MiniFrac / DFIT input range validation | Negative / Boundary | P1 |
+| TC-MF-006 | Verify Clean Volume calculation | Functional / Calculation | P1 |
+| TC-MF-007 | Verify Clean Volume changes with input data | Functional / Calculation | P1 |
+| TC-MF-008 | Verify Clean Rate calculation | Functional / Calculation | P1 |
+| TC-MF-009 | Verify ISIP plot generation | Functional / Plot Validation | P1 |
+| TC-MF-010 | Verify Square Root plot generation | Functional / Plot Validation | P1 |
+| TC-MF-011 | Verify G-Function plot generation | Functional / Plot Validation | P1 |
+| TC-MF-012 | Verify Log-Log plot generation | Functional / Plot Validation | P1 |
+| TC-MF-013 | Verify analysis results persistence | Data Persistence / Regression | P1 |
+| TC-MF-014 | Verify MiniFrac / DFIT data association between wells | Data Integrity / Regression | P1 |
+| TC-MF-015 | Verify MiniFrac / DFIT processing failure handling | Negative / Error Handling | P2 |
