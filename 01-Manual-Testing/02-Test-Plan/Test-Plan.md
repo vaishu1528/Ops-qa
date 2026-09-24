@@ -2,356 +2,242 @@
 
 ## 1. Document Information
 
-| Attribute | Details |
+| Item | Details |
 |---|---|
-| Project | WellOps |
-| Application | Oil & Gas Well Operations Management System |
 | Document | Test Plan |
+| Application Type | Web-Based Oil & Gas Well Operations Management System |
 | Testing Type | Manual Testing |
-| Environment | QA / Test Environment |
-| Status | Draft |
+| Test Level | System Testing |
+| Primary Testing Approach | Functional, Integration, Regression and End-to-End Testing |
+| User Roles | Admin, Data Engineer, Field Engineer, Analyst |
+| Test Environment | QA / Test Environment |
+| Test Data | Synthetic and Sanitized Data |
+| Defect Tracking | Defect Management System |
+| Version | 1.0 |
 
 ---
 
-# 2. Objective
+## 2. Purpose
 
-The objective of this Test Plan is to define the testing approach, scope, resources, test environment, risks, and exit criteria for validating the WellOps application.
+The purpose of this Test Plan is to define the overall testing approach, scope, resources, test activities, responsibilities, entry criteria, exit criteria, risks, and deliverables required to validate the application.
 
-The testing activities are intended to verify that the application meets defined functional requirements and provides reliable, consistent, and usable functionality for authorized users.
+The testing process will verify that the application:
 
----
-
-# 3. Application Overview
-
-WellOps is a fictional web-based Oil & Gas application used to manage:
-
-- Well information
-- Wellbore configuration
-- Directional survey data
-- Treatment information
-- Engineering analysis
-- Operational reports
-
-The application supports different user roles with role-based access to application functionality.
+- Meets defined functional requirements.
+- Supports the required business workflows.
+- Enforces role-based access.
+- Validates user inputs correctly.
+- Maintains data integrity.
+- Calculates applicable engineering values correctly.
+- Persists valid information.
+- Generates accurate results and reports.
+- Handles invalid and unexpected inputs appropriately.
+- Supports end-to-end well workflows.
 
 ---
 
-# 4. Testing Scope
+## 3. Test Objectives
 
-## 4.1 In Scope
+The primary objectives of testing are:
 
-The following areas are included in testing:
+1. Validate application functionality against documented requirements.
+2. Verify that users can complete supported well-related workflows.
+3. Validate access permissions for all supported user roles.
+4. Verify mandatory-field and input validations.
+5. Validate data persistence after save and update operations.
+6. Verify calculations and analysis results using controlled test data.
+7. Validate treatment and engineering workflows.
+8. Verify report generation and downloaded report content.
+9. Identify, document, retest, and track application defects.
+10. Perform regression testing after application changes.
+11. Validate critical end-to-end workflows.
+12. Verify that fixes do not introduce unintended functional impact.
+13. Validate application behavior across supported browsers.
+14. Ensure that important negative and boundary scenarios are covered.
 
-### Authentication
+---
 
-- User login
-- Invalid login
-- Mandatory field validation
+## 4. Application Scope
+
+### 4.1 In-Scope Modules
+
+The following application areas are included in the testing scope:
+
+- Authentication
+- Dashboard
+- Pad Management
+- Well Management
+- General Information
+- Location Information
+- Channel Inputs
+- Wellbore Configuration
+- Heat Transfer Parameters
+- Reservoir Parameters
+- Material Selection
+- Treatment Schedule
+- Engineering Analysis
+- MiniFrac / DFIT Analysis
+- Results
+- Reports
+- Comments
+- Version Management
+- Role-Based Access Control
+- Data Validation
+- Error Handling
+- End-to-End Workflow
+
+---
+
+## 5. User Roles in Scope
+
+### 5.1 Admin
+
+Testing will verify that Admin users can access functionality permitted for the administrative role and that restricted actions are handled according to configured permissions.
+
+### 5.2 Data Engineer
+
+Testing will verify technical-data-related functionality available to Data Engineers, including applicable well, wellbore, engineering, and data maintenance activities.
+
+### 5.3 Field Engineer
+
+Testing will verify operational functionality available to Field Engineers, including permitted well, treatment, and operational workflows.
+
+### 5.4 Analyst
+
+Testing will verify analytical and reporting functionality available to Analysts, including applicable analysis, result, and report activities.
+
+---
+
+## 6. Testing Scope
+
+### 6.1 Functional Testing
+
+Functional testing will verify that each application feature performs according to its defined requirement.
+
+Coverage will include:
+
+- Login
 - Logout
-- Role-based access
-
-### Well Management
-
-- Create well
-- Search well
-- Filter wells
-- View well
-- Update well
-- Activate/deactivate well
-- Duplicate Well ID validation
-
-### Well Information
-
-- General information
-- Field validation
-- Mandatory fields
-- Save and retrieve data
-
-### Wellbore
-
-- Casing information
-- Tubing information
-- Depth validation
-- Data persistence
-
-### Directional Survey
-
-- Survey data entry
-- Numeric validation
-- Required field validation
-- Data persistence
-
-### Treatment Management
-
-- Treatment schedule
-- Design data
-- Actual data
-- Treatment totals
-- Validation
-
-### Engineering
-
-- Engineering parameters
-- Analysis inputs
-- Analysis execution
-- Results validation
-
-### Reports
-
-- Well report
-- Treatment report
-- Engineering report
-- Report data consistency
+- Dashboard navigation
+- Pad selection
+- Well selection
+- Well search
+- Well filtering
+- Data entry
+- Data update
+- Data saving
+- Data retrieval
+- Treatment management
+- Analysis processing
+- Result generation
+- Report generation
+- Report download
 
 ---
 
-# 5. Testing Types
+### 6.2 Positive Testing
 
-The following testing types will be performed.
+Positive testing will verify that the system behaves correctly when valid inputs and supported workflows are provided.
 
-## Functional Testing
+Examples include:
 
-Verify that application functionality behaves according to defined requirements.
-
-## Positive Testing
-
-Verify that valid inputs produce expected results.
-
-## Negative Testing
-
-Verify that invalid inputs are handled correctly.
-
-## UI Testing
-
-Validate:
-
-- Labels
-- Fields
-- Buttons
-- Tables
-- Navigation
-- Messages
-- Alignment
-- Visibility
-
-## Integration Testing
-
-Validate data flow between related application modules.
-
-Example:
-
-Well Management → Treatment → Engineering → Reports
-
-## Regression Testing
-
-Verify that existing functionality continues to work after application changes.
-
-## Boundary Testing
-
-Validate minimum, maximum, and boundary input values.
-
-## Role-Based Access Testing
-
-Verify that users can access only the functionality permitted for their assigned roles.
-
-## Data Validation
-
-Verify consistency between entered, saved, retrieved, calculated, and displayed data.
-
-## End-to-End Testing
-
-Validate complete business workflows from login through report generation.
+- Valid login credentials.
+- Valid well information.
+- Valid engineering inputs.
+- Valid treatment values.
+- Valid analysis data.
+- Valid report requests.
+- Valid role permissions.
 
 ---
 
-# 6. Testing Approach
+### 6.3 Negative Testing
 
-Testing will follow a risk-based and requirement-driven approach.
+Negative testing will verify that the application handles invalid or unsupported conditions correctly.
 
-The general workflow will be:
+Examples include:
+
+- Invalid credentials.
+- Missing mandatory fields.
+- Invalid numeric values.
+- Unsupported formats.
+- Values outside permitted ranges.
+- Unauthorized actions.
+- Invalid workflow sequences.
+- Invalid record updates.
+- Invalid analysis inputs.
+
+---
+
+### 6.4 UI Testing
+
+UI testing will verify:
+
+- Field labels.
+- Input controls.
+- Buttons.
+- Dropdowns.
+- Tabs.
+- Navigation controls.
+- Tables.
+- Validation messages.
+- Error messages.
+- Sections and panels.
+- Pagination where applicable.
+- Data visibility.
+- Consistency of UI behavior.
+
+---
+
+### 6.5 Role-Based Access Testing
+
+Role-based testing will verify that:
+
+- Admin users receive appropriate permissions.
+- Data Engineers receive appropriate permissions.
+- Field Engineers receive appropriate permissions.
+- Analysts receive appropriate permissions.
+- Unauthorized actions are restricted.
+- Restricted controls are not incorrectly exposed.
+- Direct navigation does not bypass access restrictions.
+
+---
+
+### 6.6 Data Validation Testing
+
+Testing will verify:
+
+- Mandatory-field validation.
+- Numeric-field validation.
+- Range validation.
+- Format validation.
+- Duplicate-data validation where applicable.
+- Invalid input handling.
+- Data persistence.
+- Data update behavior.
+- Data retrieval accuracy.
+
+---
+
+### 6.7 Integration Testing
+
+Integration testing will verify interactions between related application modules.
+
+Examples include:
 
 ```text
-Requirement Analysis
-        ↓
-Test Planning
-        ↓
-Test Case Design
-        ↓
-Test Data Preparation
-        ↓
-Test Execution
-        ↓
-Defect Logging
-        ↓
-Defect Retesting
-        ↓
-Regression Testing
-        ↓
-Test Summary
-
-7. Test Environment
-
-The fictional QA environment will contain:
-
-Component	Details
-Application	WellOps Web Application
-Environment	QA
-Browser	Google Chrome
-Operating System	Windows
-Test Data	Synthetic / Demo Data
-User Types	Admin, Engineer, Operations, Viewer
-
-No production data or confidential information will be used.
-8 . Test Data
-| Field     | Example     |
-| --------- | ----------- |
-| Well ID   | WELL-1001   |
-| Well Name | Alpha-01    |
-| Field     | Demo Field  |
-| Operator  | Demo Energy |
-| Status    | Active      |
-| Well Type | Horizontal  |
-
-9. Entry Criteria
-
-Testing can begin when:
-
-Requirements are available and reviewed.
-Test environment is accessible.
-Required application build is deployed.
-Test data is available.
-Test cases are reviewed.
-Required user accounts are available.
-Major environment issues are resolved.
-
-10. Exit Criteria
-
-Testing can be considered complete when:
-
-Planned test cases have been executed.
-Critical and high-severity defects are resolved or formally accepted.
-Failed test cases have been analyzed.
-Required regression testing is completed.
-Requirement coverage is reviewed.
-Test execution results are documented.
-Test Summary Report is completed.
-
-11. Defect Management
-
-Defects identified during testing will be documented with:
-
-Defect ID
-Title
-Module
-Severity
-Priority
-Environment
-Preconditions
-Steps to Reproduce
-Expected Result
-Actual Result
-Evidence
-Status
-
-Defect lifecycle:
-New
- ↓
-Assigned
- ↓
-In Progress
- ↓
-Fixed
- ↓
-Retest
- ↓
-Verified
- ↓
-Closed
-If the defect is not fixed:
-Retest
- ↓
-Failed
- ↓
-Reopened
-
-12. Severity Classification
-| Severity | Description                                                          |
-| -------- | -------------------------------------------------------------------- |
-| Critical | Application or critical business workflow is unavailable             |
-| High     | Major functionality is not working and significantly impacts testing |
-| Medium   | Functionality is partially impacted but workaround may exist         |
-| Low      | Minor functional or UI issue with limited impact                     |
-
-13. Priority Classification
-| Priority | Description                                  |
-| -------- | -------------------------------------------- |
-| P1       | Requires immediate attention                 |
-| P2       | Should be addressed with high priority       |
-| P3       | Can be addressed in normal development cycle |
-| P4       | Low-priority improvement                     |
-
-14. Test Deliverables
-
-The following QA deliverables will be maintained:
-
-Requirements Specification
-Test Plan
-Test Strategy
-Test Cases
-Requirement Traceability Matrix
-Test Data
-Bug Reports
-Test Execution Report
-Regression Test Report
-Test Summary Report
-15. Risks
-| Risk                         | Impact                  | Mitigation                             |
-| ---------------------------- | ----------------------- | -------------------------------------- |
-| Environment unavailable      | Testing delay           | Coordinate environment availability    |
-| Incomplete requirements      | Incorrect test coverage | Review requirements before execution   |
-| Insufficient test data       | Limited validation      | Prepare synthetic test data in advance |
-| High-severity defects        | Testing blocked         | Prioritize critical workflows          |
-| Frequent application changes | Regression risk         | Maintain regression test suite         |
-
-16. Assumptions
-Required test environment is available.
-Test users are available.
-Requirements are sufficiently defined.
-Test data can be created in the QA environment.
-Application dependencies are available during testing.
-Defects can be tracked and retested.
-
-17. Testing Responsibilities
-| Role             | Responsibility                                                  |
-| ---------------- | --------------------------------------------------------------- |
-| QA Engineer      | Test design, execution, defect reporting, retesting, regression |
-| Developer        | Defect analysis and resolution                                  |
-| Business Analyst | Requirement clarification                                       |
-| Product Owner    | Requirement validation and business acceptance                  |
-| QA Lead          | Test planning, review, reporting, and QA coordination           |
-
-18. Reporting
-
-Testing progress will be communicated through:
-
-Daily QA Status
-Test Execution Report
-Defect Summary
-Regression Status
-Test Summary Report
-
-Key metrics may include:
-
-Total Test Cases
-Executed Test Cases
-Passed Test Cases
-Failed Test Cases
-Blocked Test Cases
-Pass Percentage
-Open Defects
-Closed Defects
-Requirement Coverage
-
-19. Approval
-
-This Test Plan is a fictional portfolio artifact created to demonstrate QA planning and testing practices.
+Well Selection
+      ↓
+Well Information
+      ↓
+Wellbore Configuration
+      ↓
+Engineering Parameters
+      ↓
+Treatment Schedule
+      ↓
+Engineering Analysis
+      ↓
+Results
+      ↓
+Reports
