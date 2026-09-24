@@ -744,14 +744,6 @@ The final test assessment will consider:
 
 The final testing status will be documented based on executed test evidence, requirement coverage, defect status, regression results, and applicable release criteria.
 
----
 
-## Portfolio Disclaimer
-
-This Test Plan is created for QA portfolio demonstration purposes.
-
-The application domain and workflows are based on a generic Oil & Gas well operations scenario.
-
-All user information, identifiers, records, test data, requirements, and examples used in this portfolio are fictional or sanitized.
 
 No company name, application name, production URL, credentials, customer information, proprietary source code, internal documentation, production data, screenshots, or confidential project information is included.
