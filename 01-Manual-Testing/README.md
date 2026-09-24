@@ -1,6 +1,6 @@
 # Manual Testing
 
-This section contains the manual Quality Assurance artifacts for the fictional WellOps Oil & Gas application.
+This section contains the manual Quality Assurance artifacts for my Oil & Gas application.
 
 ## QA Artifacts
 
