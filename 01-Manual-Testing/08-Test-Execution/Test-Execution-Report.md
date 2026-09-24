@@ -1,225 +1,423 @@
 # Test Execution Report
 
-## WellOps QA Portfolio — Test Execution
-
-This document demonstrates the execution and reporting of manual test cases for the fictional WellOps Oil & Gas Well Operations Management System.
-
-All execution results and test data are fictional and created for portfolio demonstration purposes.
-
----
-
-# 1. Test Execution Overview
+## Document Information
 
 | Field | Details |
 |---|---|
-| Project | WellOps — Oil & Gas Well Operations Management System |
-| Testing Type | Manual Testing |
-| Test Cycle | Cycle 1 — Functional & Regression Testing |
+| Document Name | Test Execution Report |
+| Application Type | Oil & Gas Well Operations Management System |
+| Test Level | System Testing |
+| Testing Type | Functional, Regression, Integration, Negative, Validation, Data Integrity |
 | Environment | QA |
-| Build Version | WellOps QA Build 1.0 |
-| Execution Start Date | 2026-09-01 |
-| Execution End Date | 2026-09-05 |
-| Executed By | QA Team |
-| Total Test Cases | 120 |
-| Passed | 105 |
-| Failed | 8 |
-| Blocked | 2 |
-| Not Executed | 5 |
-| Execution Completed | 115 |
-| Pass Percentage | 91.30% |
-| Overall Status | Completed with Defects |
+| Test Data | Synthetic / Sanitized |
+| Execution Cycle | Regression Cycle 1 |
+| Execution Status | Completed |
+| Report Type | Portfolio Demonstration |
 
 ---
 
-# 2. Test Execution Objective
+## 1. Purpose
 
-The objective of this test cycle is to validate the functional behavior, data validation, role-based access, calculations, UI behavior, integration points, and reporting functionality of the WellOps application.
+This Test Execution Report summarizes the execution of planned test cases during the QA test cycle.
 
-The execution covers:
+The report provides:
 
-- Functional Testing
-- Positive Testing
-- Negative Testing
-- Boundary Testing
-- UI Testing
-- Data Validation
-- Role-Based Access Testing
-- Integration Testing
-- Regression Testing
-- End-to-End Validation
+- Overall test execution status.
+- Module-wise execution results.
+- Passed, failed, blocked, and not-executed test cases.
+- Defect summary.
+- Requirement coverage.
+- Regression testing status.
+- Test execution observations.
+- Exit criteria assessment.
 
 ---
 
-# 3. Test Execution Summary
+## 2. Test Execution Scope
 
-| Test Result | Count | Percentage |
+The following modules were included in the execution cycle:
+
+| Module | Scope |
+|---|---|
+| Authentication | Login, logout, invalid credentials, session handling |
+| Dashboard | Dashboard access, information, navigation, module visibility |
+| Well Management | Pad listing, well listing, search, filtering, selection |
+| Well Information | General information, validation, persistence |
+| Wellbore Configuration | Configuration, validation, sequence, persistence |
+| Engineering Parameters | Input, validation, calculation, result validation |
+| Treatment | Design, actual data, totals, validation, persistence |
+| MiniFrac / DFIT | Input, validation, calculations, plots, persistence |
+| Version Management | Version display, selection, navigation, integrity |
+| Regression | Cross-module workflow and data integrity validation |
+
+---
+
+## 3. Test Environment
+
+| Environment Component | Configuration |
+|---|---|
+| Environment | QA |
+| Application Type | Web Application |
+| Browser 1 | Google Chrome |
+| Browser 2 | Microsoft Edge |
+| Operating System | Windows |
+| Test Data | Synthetic |
+| Database | QA Test Database |
+| API Services | QA Services |
+| Defect Tracking | Azure DevOps / Jira |
+| Test Execution Mode | Manual |
+| Network | Corporate / Test Network |
+
+---
+
+## 4. Test Execution Summary
+
+| Metric | Count |
+|---|---:|
+| Total Planned Test Cases | 132 |
+| Test Cases Executed | 132 |
+| Passed | 122 |
+| Failed | 10 |
+| Blocked | 0 |
+| Not Executed | 0 |
+| Execution Completion | 100% |
+| Pass Percentage | 92.42% |
+| Fail Percentage | 7.58% |
+
+### Execution Calculation
+
+Pass Percentage = Passed Test Cases / Executed Test Cases × 100
+
+Pass Percentage = 122 / 132 × 100 = 92.42%
+
+Fail Percentage = Failed Test Cases / Executed Test Cases × 100
+
+Fail Percentage = 10 / 132 × 100 = 7.58%
+
+---
+
+## 5. Module-Wise Execution Summary
+
+| Module | Planned | Executed | Passed | Failed | Blocked | Pass % |
+|---|---:|---:|---:|---:|---:|---:|
+| Authentication | 15 | 15 | 15 | 0 | 0 | 100% |
+| Dashboard | 12 | 12 | 12 | 0 | 0 | 100% |
+| Well Management | 15 | 15 | 13 | 2 | 0 | 86.67% |
+| Well Information | 15 | 15 | 13 | 2 | 0 | 86.67% |
+| Wellbore Configuration | 15 | 15 | 14 | 1 | 0 | 93.33% |
+| Engineering Parameters | 15 | 15 | 14 | 1 | 0 | 93.33% |
+| Treatment | 15 | 15 | 14 | 1 | 0 | 93.33% |
+| MiniFrac / DFIT | 15 | 15 | 13 | 2 | 0 | 86.67% |
+| Version Management | 15 | 15 | 14 | 1 | 0 | 93.33% |
+| **Total** | **132** | **132** | **122** | **10** | **0** | **92.42%** |
+
+---
+
+## 6. Test Case Status Distribution
+
+| Status | Count | Percentage |
 |---|---:|---:|
-| Total Test Cases | 120 | 100% |
-| Passed | 105 | 87.50% |
-| Failed | 8 | 6.67% |
-| Blocked | 2 | 1.67% |
-| Not Executed | 5 | 4.17% |
-| Executed | 115 | 95.83% |
+| Passed | 122 | 92.42% |
+| Failed | 10 | 7.58% |
+| Blocked | 0 | 0% |
+| Not Executed | 0 | 0% |
+| **Total** | **132** | **100%** |
 
-### Pass Percentage
+---
 
-```text
-Pass Percentage = Passed / Executed × 100
+## 7. Failed Test Case Summary
 
-              = 105 / 115 × 100
+The following failed scenarios were identified during the execution cycle.
 
-              = 91.30%
+| Test Case ID | Module | Failure Summary | Related Defect | Severity |
+|---|---|---|---|---|
+| TC-WELL-004 | Well Management | Exact well search did not return the expected record | BUG-001 | High |
+| TC-WELL-009 | Well Management | Well status did not refresh immediately after update | BUG-002 | High |
+| TC-WINFO-005 | Well Information | Updated information was not persisted after navigation | BUG-003 | High |
+| TC-WINFO-007 | Well Information | Required field validation message was not displayed | BUG-010 | Medium |
+| TC-WB-008 | Wellbore Configuration | Invalid wellbore sequence was accepted | BUG-004 | High |
+| TC-ENG-006 | Engineering Parameters | Previous calculation result remained after input change | BUG-005 | High |
+| TC-TREAT-006 | Treatment | Treatment total was not recalculated after stage update | BUG-006 | High |
+| TC-MF-007 | MiniFrac / DFIT | Clean Volume was not recalculated after input change | BUG-007 | High |
+| TC-VER-013 | Version Management | Restricted user could access a modification control | BUG-009 | Critical |
+| TC-VER-014 | Version Management | Version data from a previous well was displayed after switching wells | BUG-008 | Critical |
 
-4. Module-Wise Execution Summary
+---
 
-| Module                 | Total TC | Executed |  Passed | Failed | Blocked | Not Executed |
-| ---------------------- | -------: | -------: | ------: | -----: | ------: | -----------: |
-| Authentication         |       15 |       15 |      13 |      1 |       0 |            1 |
-| Well Management        |       15 |       14 |      12 |      1 |       0 |            1 |
-| Well Information       |       15 |       14 |      13 |      1 |       0 |            1 |
-| Wellbore Configuration |       15 |       14 |      13 |      1 |       0 |            1 |
-| Directional Survey     |       15 |       15 |      14 |      1 |       0 |            0 |
-| MiniFrac               |       30 |       28 |      24 |      3 |       1 |            2 |
-| Reports                |       15 |       15 |      14 |      1 |       0 |            0 |
-| Cross-Module / E2E     |        5 |        0 |       2 |      0 |       1 |            2 |
-| **Total**              |  **120** |  **115** | **105** |  **8** |   **2** |        **5** |
+## 8. Defect Summary
 
-5. Authentication Execution
+| Metric | Count |
+|---|---:|
+| Total Defects Identified | 10 |
+| Critical | 2 |
+| High | 7 |
+| Medium | 1 |
+| Low | 0 |
+| Closed | 10 |
+| Open | 0 |
+| Reopened | 0 |
 
-| Test Case ID | Scenario                                | Result       | Defect ID    |
-| ------------ | --------------------------------------- | ------------ | ------------ |
-| TC-AUTH-001  | Valid login with registered credentials | Pass         | —            |
-| TC-AUTH-002  | Invalid password validation             | Fail         | BUG-AUTH-001 |
-| TC-AUTH-003  | Blank username validation               | Pass         | —            |
-| TC-AUTH-004  | Blank password validation               | Pass         | —            |
-| TC-AUTH-005  | Username format validation              | Pass         | —            |
-| TC-AUTH-006  | Password masking                        | Pass         | —            |
-| TC-AUTH-007  | Leading/trailing whitespace validation  | Pass         | —            |
-| TC-AUTH-008  | Logout functionality                    | Pass         | —            |
-| TC-AUTH-009  | Browser back after logout               | Pass         | —            |
-| TC-AUTH-010  | Viewer login validation                 | Pass         | —            |
-| TC-AUTH-011  | Session expiration                      | Pass         | —            |
-| TC-AUTH-012  | UI validation                           | Pass         | —            |
-| TC-AUTH-013  | Failed login handling                   | Pass         | —            |
-| TC-AUTH-014  | Successful retry after failed login     | Pass         | —            |
-| TC-AUTH-015  | Authentication security validation      | Not Executed | —            |
+---
 
-6. Well Management Execution
+## 9. Defect Distribution by Module
 
-| Test Case ID | Scenario                   | Result       | Defect ID    |
-| ------------ | -------------------------- | ------------ | ------------ |
-| TC-WELL-001  | Well Management page load  | Pass         | —            |
-| TC-WELL-002  | Create new well            | Pass         | —            |
-| TC-WELL-003  | Mandatory field validation | Pass         | —            |
-| TC-WELL-004  | Duplicate well validation  | Fail         | BUG-WELL-001 |
-| TC-WELL-005  | Search by Well ID          | Pass         | —            |
-| TC-WELL-006  | Partial search             | Pass         | —            |
-| TC-WELL-007  | No search results handling | Pass         | —            |
-| TC-WELL-008  | Active well filter         | Pass         | —            |
-| TC-WELL-009  | Inactive well filter       | Pass         | —            |
-| TC-WELL-010  | Edit well information      | Pass         | —            |
-| TC-WELL-011  | Cancel edit operation      | Pass         | —            |
-| TC-WELL-012  | Well status update         | Pass         | —            |
-| TC-WELL-013  | Well details validation    | Pass         | —            |
-| TC-WELL-014  | Pagination                 | Pass         | —            |
-| TC-WELL-015  | Role-based access          | Not Executed | —            |
+| Module | Defects |
+|---|---:|
+| Well Management | 2 |
+| Well Information | 2 |
+| Wellbore Configuration | 1 |
+| Engineering Parameters | 1 |
+| Treatment | 1 |
+| MiniFrac / DFIT | 1 |
+| Version Management | 2 |
+| **Total** | **10** |
 
-7. Well Information Execution
+---
 
-| Test Case ID | Scenario                        | Result | Defect ID     |
-| ------------ | ------------------------------- | ------ | ------------- |
-| TC-WINFO-001 | Well Information page load      | Pass   | —             |
-| TC-WINFO-002 | Existing well data display      | Pass   | —             |
-| TC-WINFO-003 | Edit well information           | Pass   | —             |
-| TC-WINFO-004 | Mandatory field validation      | Pass   | —             |
-| TC-WINFO-005 | Invalid data validation         | Pass   | —             |
-| TC-WINFO-006 | Data type validation            | Pass   | —             |
-| TC-WINFO-007 | Maximum field length validation | Pass   | —             |
-| TC-WINFO-008 | Data persistence after save     | Fail   | BUG-WINFO-001 |
-| TC-WINFO-009 | Cancel modification             | Pass   | —             |
-| TC-WINFO-010 | Viewer edit restriction         | Fail   | BUG-RBAC-001  |
-| TC-WINFO-011 | Save confirmation               | Pass   | —             |
-| TC-WINFO-012 | Navigation validation           | Pass   | —             |
-| TC-WINFO-013 | Well switching validation       | Pass   | —             |
-| TC-WINFO-014 | Special character validation    | Pass   | —             |
-| TC-WINFO-015 | Data integrity validation       | Pass   | —             |
+## 10. Defect Severity Summary
 
-8. Wellbore Configuration Execution
+| Severity | Count | Percentage |
+|---|---:|---:|
+| Critical | 2 | 20% |
+| High | 7 | 70% |
+| Medium | 1 | 10% |
+| Low | 0 | 0% |
+| **Total** | **10** | **100%** |
 
-| Test Case ID | Scenario                     | Result       | Defect ID |
-| ------------ | ---------------------------- | ------------ | --------- |
-| TC-WB-001    | Wellbore page load           | Pass         | —         |
-| TC-WB-002    | Existing casing display      | Pass         | —         |
-| TC-WB-003    | Add casing configuration     | Pass         | —         |
-| TC-WB-004    | Mandatory field validation   | Pass         | —         |
-| TC-WB-005    | Numeric validation           | Pass         | —         |
-| TC-WB-006    | Negative value validation    | Pass         | —         |
-| TC-WB-007    | Duplicate casing validation  | Fail         | —         |
-| TC-WB-008    | Edit casing configuration    | Pass         | —         |
-| TC-WB-009    | Delete casing configuration  | Pass         | —         |
-| TC-WB-010    | Cancel configuration changes | Pass         | —         |
-| TC-WB-011    | Data persistence             | Pass         | —         |
-| TC-WB-012    | Tubing configuration         | Pass         | —         |
-| TC-WB-013    | Configuration validation     | Pass         | —         |
-| TC-WB-014    | Well association validation  | Pass         | —         |
-| TC-WB-015    | UI validation                | Not Executed | —         |
+---
 
-9. MiniFrac Execution
-| Test Case ID | Scenario                         | Result       | Defect ID  |
-| ------------ | -------------------------------- | ------------ | ---------- |
-| TC-MF-001    | MiniFrac module load             | Pass         | —          |
-| TC-MF-002    | Valid engineering inputs         | Pass         | —          |
-| TC-MF-003    | Mandatory field validation       | Pass         | —          |
-| TC-MF-004    | Clean Volume calculation         | Fail         | BUG-MF-001 |
-| TC-MF-005    | Step Slurry calculation          | Pass         | —          |
-| TC-MF-006    | Rho calculation                  | Pass         | —          |
-| TC-MF-007    | Two flow rate validation         | Pass         | —          |
-| TC-MF-008    | Zero flow rate validation        | Pass         | —          |
-| TC-MF-009    | Negative flow rate validation    | Pass         | —          |
-| TC-MF-010    | ISIP Plot validation             | Pass         | —          |
-| TC-MF-011    | SQRT Plot validation             | Pass         | —          |
-| TC-MF-012    | G-Function Plot validation       | Pass         | —          |
-| TC-MF-013    | Log-Log Plot validation          | Pass         | —          |
-| TC-MF-014    | Pump Time calculation            | Pass         | —          |
-| TC-MF-015    | Closure Time calculation         | Pass         | —          |
-| TC-MF-016    | G-Function calculation           | Pass         | —          |
-| TC-MF-017    | Engineering parameter validation | Pass         | —          |
-| TC-MF-018    | Recalculation after input change | Fail         | —          |
-| TC-MF-019    | Data persistence                 | Pass         | —          |
-| TC-MF-020    | Edit engineering parameters      | Pass         | —          |
-| TC-MF-021    | Cancel modification              | Pass         | —          |
-| TC-MF-022    | API and UI data consistency      | Pass         | —          |
-| TC-MF-023    | Slope validation                 | Pass         | —          |
-| TC-MF-024    | Tangent validation               | Fail         | —          |
-| TC-MF-025    | Report generation                | Pass         | —          |
-| TC-MF-026    | Correct well association         | Pass         | —          |
-| TC-MF-027    | UI validation                    | Pass         | —          |
-| TC-MF-028    | Large dataset validation         | Pass         | —          |
-| TC-MF-029    | Incomplete dataset handling      | Blocked      | —          |
-| TC-MF-030    | End-to-End MiniFrac workflow     | Not Executed | —          |
+## 11. Defect Lifecycle Summary
 
-10. Defect Summary
-| Bug ID        | Module             | Severity | Priority | Test Case    | Status |
-| ------------- | ------------------ | -------- | -------- | ------------ | ------ |
-| BUG-AUTH-001  | Authentication     | Critical | P1       | TC-AUTH-002  | Closed |
-| BUG-WELL-001  | Well Management    | High     | P2       | TC-WELL-004  | Closed |
-| BUG-WINFO-001 | Well Information   | High     | P2       | TC-WINFO-008 | Closed |
-| BUG-RBAC-001  | Role-Based Access  | High     | P2       | TC-WINFO-010 | Closed |
-| BUG-DS-001    | Directional Survey | Medium   | P2       | TC-DS-006    | Closed |
-| BUG-MF-001    | MiniFrac           | High     | P2       | TC-MF-004    | Closed |
-| BUG-REP-001   | Reports            | Medium   | P2       | TC-REP-008   | Closed |
+| Status | Count |
+|---|---:|
+| New | 0 |
+| Triaged | 0 |
+| Assigned | 0 |
+| In Development | 0 |
+| Fixed | 0 |
+| Ready for Retest | 0 |
+| Retest | 0 |
+| Reopened | 0 |
+| Closed | 10 |
 
-11. Failed Test Cases
+All sample defects included in this execution report have completed retesting and regression validation.
 
-| Test Case ID | Module             | Failure Reason                               | Defect ID     |
-| ------------ | ------------------ | -------------------------------------------- | ------------- |
-| TC-AUTH-002  | Authentication     | Invalid password was accepted                | BUG-AUTH-001  |
-| TC-WELL-004  | Well Management    | Duplicate Well ID was accepted               | BUG-WELL-001  |
-| TC-WINFO-008 | Well Information   | Updated data was not persisted               | BUG-WINFO-001 |
-| TC-WINFO-010 | Role-Based Access  | Viewer could edit Well Information           | BUG-RBAC-001  |
-| TC-DS-006    | Directional Survey | Negative inclination was accepted            | BUG-DS-001    |
-| TC-MF-004    | MiniFrac           | Clean Volume calculation was incorrect       | BUG-MF-001    |
-| TC-MF-018    | MiniFrac           | Recalculation did not update correctly       | —             |
-| TC-MF-024    | MiniFrac           | Tangent validation produced incorrect result | —             |
-| TC-REP-008   | Reports            | Downloaded report was empty                  | BUG-REP-001   |
+---
 
+## 12. Retest Summary
+
+| Metric | Count |
+|---|---:|
+| Defects Selected for Retest | 10 |
+| Retest Passed | 10 |
+| Retest Failed | 0 |
+| Retest Blocked | 0 |
+| Retest Pass Rate | 100% |
+
+### Retest Approach
+
+1. Review the defect description and original reproduction steps.
+2. Execute the same steps in the updated build.
+3. Verify that the original issue is resolved.
+4. Execute related functional scenarios.
+5. Execute applicable regression scenarios.
+6. Update the defect status based on the retest result.
+
+---
+
+## 13. Regression Testing Summary
+
+Regression testing was performed on the affected modules after defect fixes.
+
+| Regression Area | Result |
+|---|---|
+| Authentication | Passed |
+| Dashboard | Passed |
+| Well Management | Passed |
+| Well Information | Passed |
+| Wellbore Configuration | Passed |
+| Engineering Parameters | Passed |
+| Treatment | Passed |
+| MiniFrac / DFIT | Passed |
+| Version Management | Passed |
+| Cross-Module Data Integrity | Passed |
+
+---
+
+## 14. Requirement Coverage
+
+| Requirement Area | Requirements | Coverage |
+|---|---:|---|
+| Authentication | 5 | Covered |
+| Dashboard | 4 | Covered |
+| Well Management | 7 | Covered |
+| Well Information | 4 | Covered |
+| Wellbore Configuration | 5 | Covered |
+| Engineering Parameters | 5 | Covered |
+| Treatment | 6 | Covered |
+| MiniFrac / DFIT | 10 | Covered |
+| Version Management | 4 | Covered |
+| Other Requirement Areas | Multiple | Pending Test Case Creation |
+
+The RTM is maintained separately in:
+
+`01-Manual-Testing/06-RTM/Requirements-Traceability-Matrix.md`
+
+---
+
+## 15. Test Execution by Test Type
+
+| Test Type | Execution Status |
+|---|---|
+| Functional Testing | Completed |
+| Positive Testing | Completed |
+| Negative Testing | Completed |
+| Boundary Validation | Completed |
+| Data Validation | Completed |
+| Calculation Validation | Completed |
+| UI Validation | Completed |
+| Data Persistence | Completed |
+| Data Integrity | Completed |
+| RBAC Validation | Completed |
+| Regression Testing | Completed |
+| Integration Validation | Completed |
+
+---
+
+## 16. Entry Criteria Assessment
+
+| Entry Criteria | Status | Remarks |
+|---|---|---|
+| Test environment available | Met | QA environment available |
+| Test build deployed | Met | Build available for testing |
+| Test data prepared | Met | Synthetic data prepared |
+| Test cases reviewed | Met | Planned test cases available |
+| Requirements available | Met | Requirements documented |
+| Required access available | Met | Test accounts available |
+| Defect tracking available | Met | Defect tracking process available |
+
+---
+
+## 17. Exit Criteria Assessment
+
+| Exit Criteria | Status | Remarks |
+|---|---|---|
+| Planned test cases executed | Met | 132 of 132 executed |
+| Critical workflows validated | Met | Critical functional flows tested |
+| Critical defects resolved | Met | 2 sample critical defects closed |
+| High-priority defects resolved | Met | High-severity sample defects closed |
+| Retesting completed | Met | 10 of 10 defects retested |
+| Regression completed | Met | Affected modules regression tested |
+| Requirement traceability updated | Met | RTM updated for completed modules |
+| Blocked test cases | Met | No blocked cases |
+| Test execution report prepared | Met | Current document |
+
+---
+
+## 18. Test Execution Observations
+
+### Positive Observations
+
+- Authentication workflows completed successfully.
+- Dashboard navigation and module access behaved as expected.
+- Core well-management workflows were successfully validated after defect fixes.
+- Engineering calculation scenarios passed after recalculation issues were resolved.
+- Treatment calculation and persistence scenarios passed after correction.
+- MiniFrac / DFIT analysis workflows were validated.
+- Version management data isolation was validated after defect correction.
+- Regression testing did not identify additional failures in the affected workflows.
+
+### Areas Requiring Attention
+
+- Search and filtering functionality should be included in future regression cycles.
+- Calculation-dependent modules require focused validation after input or formula changes.
+- Data isolation should remain part of regression testing when switching between wells.
+- Role-based access should be validated whenever permissions or user roles are changed.
+- Persistence testing should be performed after major backend or API changes.
+
+---
+
+## 19. Risk Assessment
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Calculation logic changes | High | Execute calculation and boundary test suites |
+| Data persistence issues | High | Perform save, navigation, refresh, and reload validation |
+| Permission changes | High | Execute RBAC regression scenarios |
+| Cross-well data contamination | Critical | Validate data association after context switching |
+| API/service failures | High | Execute error-handling and recovery scenarios |
+| UI changes | Medium | Execute UI and functional regression |
+| Browser compatibility | Medium | Execute critical workflows across supported browsers |
+
+---
+
+## 20. Test Execution Metrics
+
+| Metric | Value |
+|---|---:|
+| Execution Completion | 100% |
+| Test Case Pass Rate | 92.42% |
+| Test Case Fail Rate | 7.58% |
+| Blocked Test Cases | 0 |
+| Defects Identified | 10 |
+| Critical Defects | 2 |
+| High Severity Defects | 7 |
+| Medium Severity Defects | 1 |
+| Defect Retest Pass Rate | 100% |
+| Regression Pass Status | Passed |
+| Requirement Coverage for Completed Modules | Covered |
+
+---
+
+## 21. Test Execution Evidence
+
+Evidence that can be associated with an execution cycle includes:
+
+- Test execution screenshots.
+- Failed test case screenshots.
+- Browser console logs.
+- API request/response evidence.
+- Calculation result evidence.
+- Validation message screenshots.
+- Defect reproduction evidence.
+- Retest evidence.
+- Regression execution evidence.
+
+All evidence used for this portfolio should contain synthetic data and must not expose confidential customer or company information.
+
+---
+
+## 22. Final Test Assessment
+
+Based on the sample execution results:
+
+- 132 planned test cases were executed.
+- 122 test cases passed.
+- 10 test cases initially failed.
+- 10 corresponding defects were identified.
+- All 10 defects were subsequently retested successfully.
+- No test cases remained blocked.
+- Regression validation was completed for the affected modules.
+- Critical data integrity and access-control scenarios were included in the regression scope.
+- Requirement traceability was maintained for the completed test-case modules.
+
+The execution cycle is considered **completed for the defined portfolio scope**.
+
+---
+
+## 23. Test Execution Sign-Off
+
+| Role | Name | Status |
+|---|---|---|
+| QA Engineer | Portfolio QA Engineer | Completed |
+| QA Lead | Demo QA Lead | Reviewed |
+| Development Representative | Demo Development Team | Reviewed |
+| Business Representative | Demo Business Stakeholder | Reviewed |
+
+---
+
+## 24. Portfolio Disclaimer
+
+The execution counts, defect IDs, test results, users, well identifiers, environment details, and test data in this document are synthetic examples created for portfolio demonstration purposes.
+
+No confidential customer, company, production, or proprietary project information is included.
