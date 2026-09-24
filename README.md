@@ -6,7 +6,7 @@ This repository demonstrates an end-to-end **Quality Assurance and Software Test
 
 The portfolio showcases practical QA activities across **Manual Testing, Test Case Design, Defect Management, Requirement Traceability, Regression Testing, API Testing, and Test Automation**.
 
-> **Note:** This is a fictional and sanitized portfolio project. No confidential company code, credentials, proprietary data, or production information is included.
+
 
 ---
 
