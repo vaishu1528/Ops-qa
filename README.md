@@ -30,6 +30,5 @@ Ops-QA-Portfolio/
 ├── 02-Automation-Testing/
 │   ├── Selenium-Java/
 │   ├── Playwright-TypeScript/
-│   └── CI-CD/
 │
 └── README.md
